@@ -1,0 +1,19 @@
+{
+  "name": "projet6-ocr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "sass": "sass --watch ./styles/sass/style.scss:./styles/css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Unautrepseudo/-EricNarbo_6_15052021.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Unautrepseudo/-EricNarbo_6_15052021/issues"
+  },
+  "homepage": "https://github.com/Unautrepseudo/-EricNarbo_6_15052021#readme"
+}
