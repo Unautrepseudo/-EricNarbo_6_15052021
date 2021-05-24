@@ -23,6 +23,7 @@ const showPhotographers = (photographers) => {
     ({ name, id, city, country, tags, tagline, price, portrait }) => {
       photographersContainer.innerHTML += `
        <div class="profil-card" data-card="${id}">
+          <a href="./single.html">
             <div class="pc-header">
               <img src="./assets/img/idPhotos/${portrait}" alt="" />
               <h2>${name}</h2>
@@ -42,6 +43,7 @@ const showPhotographers = (photographers) => {
               })
               .join('')}
             </div>
+          </a>
           </div>
       `;
     }
@@ -92,19 +94,31 @@ const filterbyTag = (photographers, currentTargetData) => {
    SINGLE-PAGE
 **************/
 
-const getMediabyPhotographer = ({ photographers, media }) => {
+const getMediabyPhotographer = ({ media }) => {
   const profilCards = document.querySelectorAll('.profil-card');
 
   profilCards.forEach((card) => {
     card.addEventListener('click', (e) => {
-      let toto = e.currentTarget.dataset.card;
-      mediaById(toto);
+      let cardId = e.currentTarget.dataset.card;
+      mediaById(cardId, media);
     });
   });
+  const toto = document.querySelector('.single-content');
+  const mediaById = (cardId, media) => {
+    let singleMedia = [];
+    media.filter((item) => {
+      if (item.photographerId === +cardId) {
+        singleMedia.push(item);
+      }
+    });
+    // console.log(singleMedia);
+    singleMedia.map((single) => {
+      console.log(single);
 
-  const mediaById = (toto) => {
-    photographers.map(({ id }) => {
-      console.log(id);
+      //    toto.innerHTML = `
+      //   <span>${single.title}</span>
+      //   <img src="./assets/img/idPhotos/${single.image}" alt="">
+      // `;
     });
   };
 };
