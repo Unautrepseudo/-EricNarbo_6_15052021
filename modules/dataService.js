@@ -10,16 +10,19 @@ export const data = async () => {
 
   showPhotographers(dataBase.photographers);
   tagsListMenu(dataBase);
-  filterItems(dataBase);
+  handleTags(dataBase);
+  getMediabyPhotographer(dataBase);
 };
-
+/*************
+   HOME-PAGE
+**************/
 //// photographes
 
 const showPhotographers = (photographers) => {
   photographers.forEach(
     ({ name, id, city, country, tags, tagline, price, portrait }) => {
       photographersContainer.innerHTML += `
-       <div class="profil-card">
+       <div class="profil-card" data-card="${id}">
             <div class="pc-header">
               <img src="./assets/img/idPhotos/${portrait}" alt="" />
               <h2>${name}</h2>
@@ -54,26 +57,25 @@ const tagsListMenu = ({ photographers }) => {
       tagsArray.push(tag);
     });
   });
-  const cleanTagsArray = [...new Set(tagsArray.map((tag) => tag))];
-  cleanTagsArray.map((tag) => {
+  const uniqueTagsArray = [...new Set(tagsArray.map((tag) => tag))];
+  uniqueTagsArray.map((tag) => {
     nav.innerHTML += `<span class='tag' data-id="${tag}">#${tag}</span>`;
   });
 };
 
 /// filter by tagName
-const filterItems = ({ photographers }) => {
+const handleTags = ({ photographers }) => {
   let tags = document.querySelectorAll('.tag');
-
   tags.forEach((tag) => {
     tag.addEventListener('click', (e) => {
       const currentTargetData = e.currentTarget.dataset.id;
 
-      getTags(photographers, currentTargetData);
+      filterbyTag(photographers, currentTargetData);
     });
   });
 };
 
-const getTags = (photographers, currentTargetData) => {
+const filterbyTag = (photographers, currentTargetData) => {
   let filteredPhotographers = [];
   photographers.filter((photographer) => {
     photographer.tags.forEach((tag) => {
@@ -83,6 +85,26 @@ const getTags = (photographers, currentTargetData) => {
     });
   });
   photographersContainer.innerHTML = '';
-
   showPhotographers(filteredPhotographers);
+};
+
+/*************
+   SINGLE-PAGE
+**************/
+
+const getMediabyPhotographer = ({ photographers, media }) => {
+  const profilCards = document.querySelectorAll('.profil-card');
+
+  profilCards.forEach((card) => {
+    card.addEventListener('click', (e) => {
+      let toto = e.currentTarget.dataset.card;
+      mediaById(toto);
+    });
+  });
+
+  const mediaById = (toto) => {
+    photographers.map(({ id }) => {
+      console.log(id);
+    });
+  };
 };
