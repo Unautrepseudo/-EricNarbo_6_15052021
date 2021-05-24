@@ -1,0 +1,21 @@
+@use '../utils/variables' as v;
+
+button {
+  background: v.$primary;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  &:hover {
+    background: v.$secondary;
+    color: black;
+  }
+}
+
+.btn-mc {
+  margin-top: 20px;
+  margin-left: 45%;
+  transform: translateX(-50%);
+}

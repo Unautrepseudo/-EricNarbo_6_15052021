@@ -1,3 +1,3 @@
-import data from './modules/data.mjs';
-
-console.log(data);
+import { data } from './modules/dataService.js';
+data();
+// console.log(uniqueTagsArray);

@@ -1,0 +1,31 @@
+@use '../base/_reset';
+@use '../components/_header.scss';
+@use '../components/_profilCard.scss';
+@use '../components/buttons.scss';
+@use '../utils/variables' as v;
+
+.main-container {
+  width: 90%;
+  margin-left: 53%;
+  transform: translateX(-50%);
+}
+
+main {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  h1 {
+    font-size: 40px;
+    position: absolute;
+    right: 17%;
+    top: 63px;
+    color: v.$text-secondary;
+  }
+  .profil-cards-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
