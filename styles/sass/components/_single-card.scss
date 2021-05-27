@@ -1,12 +1,37 @@
 @use '../utils/variables' as v;
+
 .sc-card {
-  width: 400px;
-  height: 400px;
-  border: 1px solid black;
-  & img {
-    border: 1px solid red;
+  width: 370px;
+  height: 370px;
+  margin-bottom: 40px;
+  color: v.$text-secondary;
+  font-size: 1.4em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  & .img-container {
+    display: flex;
+    height: 340px;
   }
+
+  & img {
+    border-radius: 6px;
+    width: 100%;
+    object-fit: cover;
+  }
+
   & i {
     color: v.$primary;
+  }
+  & .sc-card-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  & .likes {
+    font-weight: 500;
+    cursor: pointer;
   }
 }

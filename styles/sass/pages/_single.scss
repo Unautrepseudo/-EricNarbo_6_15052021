@@ -3,6 +3,8 @@
 @use '../components/_single-card.scss';
 @use '../components/hero.scss';
 @use '../components/buttons.scss';
+@use '../components/select.scss';
+
 @use '../utils/variables' as v;
 
 .single-container {
@@ -20,4 +22,11 @@
     color: v.$text-secondary;
     font-size: 60px;
   }
+}
+
+.single-content-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }

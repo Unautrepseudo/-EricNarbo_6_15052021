@@ -6,6 +6,17 @@
   justify-content: space-between;
   padding: 50px;
   background: v.$grey;
+
+  & .name-container {
+    display: flex;
+    & button {
+      width: 160px;
+      height: 60px;
+      padding: 10px;
+      margin-left: 60px;
+    }
+  }
+
   & img {
     border-radius: 50%;
     width: 210px;
@@ -13,12 +24,7 @@
     object-fit: cover;
     justify-self: center;
   }
-  & button {
-    height: 60px;
-    position: absolute;
-    left: 750px;
-    padding: 10px;
-  }
+
   & h1 {
     margin-bottom: 0px;
     color: v.$text-primary;
@@ -46,5 +52,6 @@
   .tag {
     font-size: 1.1em;
     margin-top: 10px;
+    font-weight: 600;
   }
 }
