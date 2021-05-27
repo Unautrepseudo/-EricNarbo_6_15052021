@@ -51,6 +51,9 @@
     & .tagline {
       font-size: 0.9em;
     }
+    &.country {
+      text-transform: uppercase;
+    }
   }
 
   .pc-tags-container {

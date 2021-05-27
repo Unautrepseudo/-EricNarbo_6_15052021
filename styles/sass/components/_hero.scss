@@ -1,0 +1,50 @@
+@use '../utils/variables' as v;
+
+.hero {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 50px;
+  background: v.$grey;
+  & img {
+    border-radius: 50%;
+    width: 210px;
+    height: 210px;
+    object-fit: cover;
+    justify-self: center;
+  }
+  & button {
+    height: 60px;
+    position: absolute;
+    left: 750px;
+    padding: 10px;
+  }
+  & h1 {
+    margin-bottom: 0px;
+    color: v.$text-primary;
+    text-align: center;
+    font-size: 3.5em;
+  }
+  & .sc-location {
+    color: v.$text-secondary;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 1.7em;
+  }
+  & .tagline {
+    margin-top: 30px;
+    font-size: 1.2em;
+    color: v.$text-grey;
+  }
+  & .country {
+    text-transform: uppercase;
+  }
+  .sc-tags-container {
+    display: flex;
+    width: 100%;
+  }
+  .tag {
+    font-size: 1.1em;
+    margin-top: 10px;
+  }
+}

@@ -12,15 +12,37 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="styles/css/style.css" />
-    <script type="module" src="single.js" defer></script>
-    <title>FishEye</title>
+    <script src="./scripts/single.js" defer></script>
+    <title>FishEye page de {artiste}</title>
   </head>
   <body>
     <div class="single-container">
       <header>
         <span class="logo"> Fish<i class="fas fa-camera"></i>ye </span>
       </header>
-      <section class="single-content-container"></section>
+      <section class="hero">
+        <div class="hero-infos"></div>
+        <button>Contactez-moi</button>
+        <img class="hero-img" src="" alt="" />
+      </section>
+      <nav>
+        <label for="selectedBy">Trier par</label>
+        <select name="type" id="selectedBy">
+          <option value="Popularité">Popularité</option>
+          <span>^</span>
+          <option value="Date">Date</option>
+          <option value="Titre">Titre</option>
+        </select>
+      </nav>
+      <section class="single-content-container">
+        <div class="sc-card">
+          <img src="" alt="une belle image" />
+          <div class="sc-card-footer">
+            <span class="sc-card-title">titre image</span>
+            <i class="fas fa-heart"></i>
+          </div>
+        </div>
+      </section>
     </div>
   </body>
 </html>

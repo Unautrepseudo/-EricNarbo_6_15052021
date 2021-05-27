@@ -3,7 +3,7 @@ const photographersContainer = document.querySelector(
   '.profil-cards-container'
 );
 
-export const data = async () => {
+const data = async () => {
   const dataBase = await fetch('../data.json')
     .then((response) => response.json())
     .then((json) => json);
@@ -22,8 +22,8 @@ const showPhotographers = (photographers) => {
   photographers.forEach(
     ({ name, id, city, country, tags, tagline, price, portrait }) => {
       photographersContainer.innerHTML += `
-       <div class="profil-card" data-card="${id}">
-         
+        <div class="profil-card" data-card="${id}">
+         <a href="./single.html">
             <div class="pc-header">
               <img src="./assets/img/idPhotos/${portrait}" alt="" />
               <h2>${name}</h2>
@@ -43,8 +43,8 @@ const showPhotographers = (photographers) => {
               })
               .join('')}
             </div>
-         
-          </div>
+          </a>
+        </div>
       `;
     }
   );
@@ -141,3 +141,4 @@ const getMediabyPhotographer = ({ media, photographers }) => {
     });
   };
 };
+data();

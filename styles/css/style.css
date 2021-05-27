@@ -18,18 +18,18 @@ img {
   width: 100%;
 }
 
-header {
+.main-container header {
   width: 66%;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #901c1c;
 }
-header .logo {
+.main-container header .logo {
   font-size: 60px;
   transform: translateY(-6px);
 }
-header nav {
+.main-container header nav {
   transform: translateX(50px);
 }
 
@@ -96,6 +96,9 @@ header nav {
 .profil-card .pc-info-container .tagline {
   font-size: 0.9em;
 }
+.profil-card .pc-info-container.country {
+  text-transform: uppercase;
+}
 .profil-card .pc-tags-container {
   margin-top: 4px;
   display: flex;
@@ -146,6 +149,82 @@ main .profil-cards-container {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.sc-card {
+  width: 400px;
+  height: 400px;
+  border: 1px solid black;
+}
+.sc-card img {
+  border: 1px solid red;
+}
+.sc-card i {
+  color: #901c1c;
+}
+
+.hero {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 50px;
+  background: #f2f2f2;
+}
+.hero img {
+  border-radius: 50%;
+  width: 210px;
+  height: 210px;
+  object-fit: cover;
+  justify-self: center;
+}
+.hero button {
+  height: 60px;
+  position: absolute;
+  left: 750px;
+  padding: 10px;
+}
+.hero h1 {
+  margin-bottom: 0px;
+  color: #d3573c;
+  text-align: center;
+  font-size: 3.5em;
+}
+.hero .sc-location {
+  color: #901c1c;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 1.7em;
+}
+.hero .tagline {
+  margin-top: 30px;
+  font-size: 1.2em;
+  color: #525252;
+}
+.hero .country {
+  text-transform: uppercase;
+}
+.hero .sc-tags-container {
+  display: flex;
+  width: 100%;
+}
+.hero .tag {
+  font-size: 1.1em;
+  margin-top: 10px;
+}
+
+.single-container {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.single-container header {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.single-container .logo {
+  color: #901c1c;
+  font-size: 60px;
 }
 
 /*# sourceMappingURL=style.css.map */

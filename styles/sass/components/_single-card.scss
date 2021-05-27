@@ -1,0 +1,12 @@
+@use '../utils/variables' as v;
+.sc-card {
+  width: 400px;
+  height: 400px;
+  border: 1px solid black;
+  & img {
+    border: 1px solid red;
+  }
+  & i {
+    color: v.$primary;
+  }
+}
