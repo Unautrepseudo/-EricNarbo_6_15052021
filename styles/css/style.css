@@ -94,6 +94,7 @@ img {
 }
 .profil-card .pc-info-container .tagline {
   font-size: 0.9em;
+  color: #525252;
 }
 .profil-card .pc-info-container.country {
   text-transform: uppercase;
