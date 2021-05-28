@@ -6,11 +6,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: v.$text-secondary;
 
     & .logo {
       font-size: 60px;
       transform: translateY(-6px);
+      color: v.$text-secondary;
     }
     & nav {
       transform: translateX(50px);

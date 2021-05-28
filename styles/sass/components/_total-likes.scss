@@ -1,0 +1,19 @@
+@use '../utils/variables' as v;
+
+.total-likes-container {
+  font-size: 1.5em;
+  width: 350px;
+  height: 70px;
+  position: fixed;
+  background: v.$text-primary;
+  border-radius: 8px;
+  right: 12%;
+  bottom: 1%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+
+  & .sum {
+    margin-right: 10px;
+  }
+}

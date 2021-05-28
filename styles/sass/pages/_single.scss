@@ -4,6 +4,7 @@
 @use '../components/hero.scss';
 @use '../components/buttons.scss';
 @use '../components/select.scss';
+@use '../components/total-likes.scss';
 
 @use '../utils/variables' as v;
 
@@ -29,4 +30,5 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-bottom: 50px;
 }

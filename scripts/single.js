@@ -2,9 +2,11 @@
 const singleContentContainer = document.querySelector(
   '.single-content-container'
 );
+const likes = document.querySelectorAll('.likes');
+
 const herosInfos = document.querySelector('.hero-infos');
 const heroImg = document.querySelector('.hero-img');
-
+let getLikes = [];
 const profilData = JSON.parse(sessionStorage.getItem('profil_array'));
 
 const { infos, medias } = profilData;
@@ -40,8 +42,7 @@ displaySingleInfo();
 const displayMedia = () => {
   let singleName = infos[0].name;
   medias.map(({ title, image, likes, id }) => {
-    const like = +likes;
-    console.log(like);
+    const numLike = +likes;
     singleContentContainer.innerHTML += `
       <div class="sc-card">
         <div id='${id}' class="img-container">
@@ -50,18 +51,28 @@ const displayMedia = () => {
         <div class="sc-card-footer">
           <span class="sc-card-title">${title}</span>
           <div class="likes-container">
-            <span class="likes"> ${like} </span><i class="fas fa-heart"></i>
+            <span class="likes"> ${numLike} </span><i class="fas fa-heart"></i>
           </div>
         </div>
       </div>
     `;
+    getLikes.push(numLike);
   });
 };
 displayMedia();
 
-const likesIncrement = (num) => {
-  const likes = document.querySelectorAll('.likes');
-  likes.forEach((like) => {
-    this.innerHTML = num++;
-  });
+const reduceLikes = () => {
+  const container = document.querySelector('.total-likes-container');
+  const sum = document.querySelector('.sum');
+  const rate = document.querySelector('.rate');
+  let price = infos[0].price;
+
+  const totalLikes = getLikes.reduce((total, item) => {
+    total += item;
+    return total;
+  }, 0);
+
+  sum.innerText = totalLikes;
+  rate.innerText = `${price} euros/jours`;
 };
+reduceLikes();

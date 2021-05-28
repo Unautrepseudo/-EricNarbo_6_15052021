@@ -7,7 +7,6 @@
 
 a {
   text-decoration: none;
-  color: black;
 }
 
 li {
@@ -23,11 +22,11 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #901c1c;
 }
 .main-container header .logo {
   font-size: 60px;
   transform: translateY(-6px);
+  color: #901c1c;
 }
 .main-container header nav {
   transform: translateX(50px);
@@ -258,6 +257,23 @@ main .profil-cards-container {
   font-size: 1.2em;
 }
 
+.total-likes-container {
+  font-size: 1.5em;
+  width: 350px;
+  height: 70px;
+  position: fixed;
+  background: #d3573c;
+  border-radius: 8px;
+  right: 12%;
+  bottom: 1%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+.total-likes-container .sum {
+  margin-right: 10px;
+}
+
 .single-container {
   width: 70%;
   margin: 0 auto;
@@ -278,6 +294,7 @@ main .profil-cards-container {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-bottom: 50px;
 }
 
 /*# sourceMappingURL=style.css.map */
