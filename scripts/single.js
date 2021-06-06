@@ -17,7 +17,7 @@ const displaySingleInfo = () => {
       <div class="single-card">
         <div class="name-container">
           <h1>${name}</h1>
-          <button>Contactez-moi</button>
+          <button class='contact-btn'>Contactez-moi</button>
         </div>
         <div class="sc-location">
           <span class="city">${city}</span>
@@ -76,3 +76,44 @@ const reduceLikes = () => {
   rate.innerText = `${price} euros/jours`;
 };
 reduceLikes();
+
+///////////////
+//FORM
+///////////////
+const modalForm = document.querySelector('.modal-form');
+
+const form = document.querySelector('form');
+const inputs = document.querySelectorAll('.form-input');
+const closeForm = document.querySelector('.close-form-btn');
+const btnSubmit = document.querySelector('.btn-submit');
+const btnContact = document.querySelector('.contact-btn');
+
+//toggle form
+closeForm.addEventListener('click', () => {
+  modalForm.style.display = 'none';
+});
+
+btnContact.addEventListener('click', () => {
+  modalForm.style.display = 'flex';
+});
+
+//get form data
+
+const getFormData = () => {
+  const data = {
+    prenom: null,
+    nom: null,
+    email: null,
+    message: null,
+  };
+
+  btnSubmit.addEventListener('click', (e) => {
+    e.preventDefault();
+    inputs.forEach((input) => {
+      let inputId = input.getAttribute('id');
+      data[inputId] = input.value;
+    });
+    console.log(data);
+  });
+};
+getFormData();

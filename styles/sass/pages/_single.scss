@@ -1,10 +1,11 @@
 @use '../base/_reset';
-@use '../components/_header.scss';
-@use '../components/_single-card.scss';
-@use '../components/hero.scss';
-@use '../components/buttons.scss';
-@use '../components/select.scss';
-@use '../components/total-likes.scss';
+@use '../components/_header';
+@use '../components/_single-card';
+@use '../components/hero';
+@use '../components/buttons';
+@use '../components/select';
+@use '../components/total-likes';
+@use '../components/modal-form';
 
 @use '../utils/variables' as v;
 
