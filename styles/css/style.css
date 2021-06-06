@@ -165,7 +165,8 @@ main .profil-cards-container {
   display: flex;
   height: 340px;
 }
-.sc-card img {
+.sc-card img,
+.sc-card video {
   border-radius: 6px;
   width: 100%;
   object-fit: cover;

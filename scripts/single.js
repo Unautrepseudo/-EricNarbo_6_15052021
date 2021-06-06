@@ -40,12 +40,32 @@ displaySingleInfo();
 
 const displayMedia = () => {
   let singleName = infos[0].name;
-  medias.map(({ title, image, likes, id }) => {
+  medias.map(({ title, image, likes, id, video }) => {
+    // const test = image.split('.').pop();
+    // const videoooo = video.split('.').pop();
+
+    console.log(video);
     const numLike = +likes;
+    const isImg = image ? true : false;
     singleContentContainer.innerHTML += `
       <div class="sc-card">
         <div id='${id}' class="img-container">
-          <img src="./assets/img/${singleName}/${image}" alt="une belle image" />
+        ${
+          isImg
+            ? `
+            <img
+              src="./assets/img/${singleName}/${image}"
+              alt="une belle image"
+            />
+          `
+            : `
+            <video
+              src="./assets/img/${singleName}/${video}"
+              alt="une belle video"
+            />
+          `
+        }
+
         </div>
         <div class="sc-card-footer">
           <span class="sc-card-title">${title}</span>
