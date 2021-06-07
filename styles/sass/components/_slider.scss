@@ -1,0 +1,49 @@
+@use '../utils/variables' as v;
+
+.slider {
+  width: 100%;
+  height: 100%;
+  display: none;
+  position: fixed;
+  justify-content: center;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+
+  & .slides-container {
+    max-width: 1200px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 350px;
+    background: white;
+    padding-left: 50px;
+    padding-right: 50px;
+
+    & .slider-img {
+      width: 100%;
+      max-height: 800px !important;
+
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  }
+  & i {
+    align-self: center;
+    color: v.$text-secondary;
+    font-size: 60px;
+    cursor: pointer;
+  }
+  & .fa-times {
+    position: absolute;
+    top: 45px;
+    left: 90%;
+  }
+
+  .slider-img-title {
+    color: v.$text-secondary;
+    font-size: 28px;
+    margin-top: 10px;
+  }
+}

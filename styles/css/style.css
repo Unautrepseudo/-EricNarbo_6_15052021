@@ -170,6 +170,7 @@ main .profil-cards-container {
   border-radius: 6px;
   width: 100%;
   object-fit: cover;
+  cursor: pointer;
 }
 .sc-card i {
   color: #901c1c;
@@ -338,6 +339,50 @@ main .profil-cards-container {
   font-size: 50px;
   color: white;
   cursor: pointer;
+}
+
+.slider {
+  width: 100%;
+  height: 100%;
+  display: none;
+  position: fixed;
+  justify-content: center;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+}
+.slider .slides-container {
+  max-width: 1200px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 350px;
+  background: white;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.slider .slides-container .slider-img {
+  width: 100%;
+  max-height: 800px !important;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.slider i {
+  align-self: center;
+  color: #901c1c;
+  font-size: 60px;
+  cursor: pointer;
+}
+.slider .fa-times {
+  position: absolute;
+  top: 45px;
+  left: 90%;
+}
+.slider .slider-img-title {
+  color: #901c1c;
+  font-size: 28px;
+  margin-top: 10px;
 }
 
 .single-container {

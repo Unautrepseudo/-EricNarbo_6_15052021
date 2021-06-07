@@ -41,12 +41,8 @@ displaySingleInfo();
 const displayMedia = () => {
   let singleName = infos[0].name;
   medias.map(({ title, image, likes, id, video }) => {
-    // const test = image.split('.').pop();
-    // const videoooo = video.split('.').pop();
-
-    console.log(video);
-    const numLike = +likes;
-    const isImg = image ? true : false;
+    let numLike = +likes;
+    let isImg = image ? true : false;
     singleContentContainer.innerHTML += `
       <div class="sc-card">
         <div id='${id}' class="img-container">
@@ -55,17 +51,16 @@ const displayMedia = () => {
             ? `
             <img
               src="./assets/img/${singleName}/${image}"
+              value="${title}"
               alt="une belle image"
-            />
-          `
+            />`
             : `
             <video
               src="./assets/img/${singleName}/${video}"
+              value="${title}"
               alt="une belle video"
-            />
-          `
+            />`
         }
-
         </div>
         <div class="sc-card-footer">
           <span class="sc-card-title">${title}</span>
@@ -79,6 +74,119 @@ const displayMedia = () => {
   });
 };
 displayMedia();
+
+//////////////////////////
+//SLIDER
+///////////////
+const closeSliderBtn = document.querySelector('.close-slider-btn');
+const slider = document.querySelector('.slider');
+const slidesContainer = document.querySelector('.slides-container');
+
+const showSlider = () => {
+  const imgContainers = document.querySelectorAll('.img-container');
+  let sliderImgObj = [];
+
+  imgContainers.forEach((container, i) => {
+    let getImgSrc = container.firstElementChild.getAttribute('src');
+    let getImgTitle = container.firstElementChild.getAttribute('value');
+
+    let getChildTag = container.firstElementChild.tagName;
+
+    sliderImgObj.push({
+      src: getImgSrc,
+      title: getImgTitle,
+      tag: getChildTag,
+    });
+    // sliderImgObj.src.push(getImgSrc);
+    // sliderImgObj.title.push(getImgTitle);
+    // sliderImgObj.childTag.push(getChildTag);
+
+    container.addEventListener('click', () => {
+      slider.style.display = 'flex';
+
+      if (getChildTag === 'IMG') {
+        slidesContainer.innerHTML = `
+          <img
+            src="${getImgSrc}"
+            class="slider-img"
+            value='${i}'
+            alt="une belle image"
+          />
+          <span class="slider-img-title" >${getImgTitle}</span>`;
+      } else {
+        slidesContainer.innerHTML = `
+          <video
+            src="${getImgSrc}"
+            class="slider-img"
+            value='${i}'
+            alt="une belle video"
+          /></video>
+          <span class="slider-img-title">${getImgTitle}</span>`;
+      }
+      handleSlide(sliderImgObj, i);
+    });
+  });
+};
+
+const handleSlide = (sliderImgObj, i) => {
+  const chevronLeft = document.querySelector('.fa-chevron-left');
+  const chevronRight = document.querySelector('.fa-chevron-right');
+  console.log(sliderImgObj);
+  chevronLeft.addEventListener('click', () => {
+    i--;
+    if (sliderImgObj[i].tag === 'IMG') {
+      slidesContainer.innerHTML = `
+          <img
+            src="${sliderImgObj[i].src}"
+            class="slider-img"
+            value='${i}'
+            alt="une belle image"
+          />
+          <span class="slider-img-title" >${sliderImgObj[i].title}</span>`;
+    } else {
+      slidesContainer.innerHTML = `
+          <video
+            src="${sliderImgObj[i].src}"
+            class="slider-img"
+            value='${i}'
+            alt="une belle video"
+          /></video>
+          <span class="slider-img-title">${sliderImgObj[i].title}</span>`;
+    }
+  });
+
+  chevronRight.addEventListener('click', () => {
+    i++;
+    if (sliderImgObj[i].tag === 'IMG') {
+      slidesContainer.innerHTML = `
+          <img
+            src="${sliderImgObj[i].src}"
+            class="slider-img"
+            value='${i}'
+            alt="une belle image"
+          />
+          <span class="slider-img-title" >${sliderImgObj[i].title}</span>`;
+    } else {
+      slidesContainer.innerHTML = `
+          <video
+            src="${sliderImgObj[i].src}"
+            class="slider-img"
+            value='${i}'
+            alt="une belle video"
+          /></video>
+          <span class="slider-img-title">${sliderImgObj[i].title}</span>`;
+    }
+  });
+};
+
+showSlider();
+
+const closeSlider = () => {
+  closeSliderBtn.addEventListener('click', () => {
+    slider.style.display = 'none';
+  });
+};
+closeSlider();
 
 //////////////////////////
 //HANDLE LIKES
