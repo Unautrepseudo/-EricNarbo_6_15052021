@@ -9,6 +9,7 @@
   left: 50%;
   transform: translateX(-50%);
   background: white;
+  z-index: 8;
 
   & .slides-container {
     max-width: 1200px;

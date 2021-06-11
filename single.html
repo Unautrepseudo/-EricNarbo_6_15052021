@@ -32,14 +32,18 @@
         </div>
         <span class="rate"></span>
       </section>
-      <section class="select-section">
-        <label for="selectedBy">Trier par</label>
-        <select name="type" id="selectedBy">
-          <option value="Popularité">Popularité</option>
-          <span>^</span>
-          <option value="Date">Date</option>
-          <option value="Titre">Titre</option>
-        </select>
+      <section class="orderBy-section">
+        <h2>Trier par</h2>
+        <ul class="dropdown-menu">
+          <li class="">
+            <span value="Popularité" class="by-popularity">Popularité</span>
+            <i class="fas fa-chevron-circle-up chevron-down"></i>
+          </li>
+          <div class="subline"></div>
+          <li class="by-date" value="Date">Date</li>
+          <div class="subline"></div>
+          <li class="by-title" value="Titre">Titre</li>
+        </ul>
       </section>
       <section class="single-content-container"></section>
       <section class="modal-form">

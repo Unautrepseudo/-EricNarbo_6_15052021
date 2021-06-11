@@ -3,7 +3,7 @@
 @use '../components/_single-card';
 @use '../components/hero';
 @use '../components/buttons';
-@use '../components/select';
+@use '../components/dropdown';
 @use '../components/total-likes';
 @use '../components/modal-form';
 @use '../components/slider';
@@ -32,5 +32,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  padding-top: 90px;
   margin-bottom: 50px;
 }

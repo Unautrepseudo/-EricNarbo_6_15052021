@@ -238,26 +238,59 @@ main .profil-cards-container {
   font-weight: 600;
 }
 
-.select-section {
+.orderBy-section {
   margin-top: 20px;
   margin-bottom: 50px;
+  display: flex;
+  position: absolute;
+  top: 440px;
+  z-index: 2;
 }
-.select-section label {
+.orderBy-section h2 {
   font-weight: bold;
   font-size: 1.3em;
   margin-right: 15px;
 }
-.select-section select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: none;
-  width: 120px;
+.orderBy-section ul {
+  background: #901c1c;
+  width: 180px;
+  height: 60px;
+  overflow-y: hidden;
+  border-radius: 5px;
+  transition: 0.4s;
+}
+.orderBy-section i {
   background: #901c1c;
   color: white;
-  padding: 15px;
-  text-align: center;
-  font-size: 1.2em;
+  position: absolute;
+  right: 4.1%;
+  top: 22px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.orderBy-section li {
+  border: none;
+  color: white;
+  padding: 18px;
+  text-align: start;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+.orderBy-section .subline {
+  margin: 0 auto;
+  width: 160px;
+  height: 1px;
+  border-bottom: 1px solid white;
+}
+
+.toggle-chevron {
+  transform: rotate(180deg);
+  right: 4.1%;
+  top: 21px !important;
+}
+
+.show-dropdown {
+  height: 180px !important;
 }
 
 .total-likes-container {
@@ -285,6 +318,7 @@ main .profil-cards-container {
   justify-content: center;
   align-items: center;
   background: rgba(255, 255, 255, 0.741);
+  z-index: 8;
 }
 .modal-form form {
   display: flex;
@@ -350,6 +384,7 @@ main .profil-cards-container {
   left: 50%;
   transform: translateX(-50%);
   background: white;
+  z-index: 8;
 }
 .slider .slides-container {
   max-width: 1200px;
@@ -405,6 +440,7 @@ main .profil-cards-container {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  padding-top: 90px;
   margin-bottom: 50px;
 }
 

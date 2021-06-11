@@ -1,3 +1,121 @@
+//////////////////////////
+//SLIDER
+///////////////
+const handleSlider = () => {
+  const closeSliderBtn = document.querySelector('.close-slider-btn');
+  const slider = document.querySelector('.slider');
+  const slidesContainer = document.querySelector('.slides-container');
+
+  const showSlider = () => {
+    const imgContainers = document.querySelectorAll('.img-container');
+    let sliderImgObj = [];
+    let itemsLength = imgContainers.length;
+    imgContainers.forEach((container, i) => {
+      let getImgSrc = container.firstElementChild.getAttribute('src');
+      let getImgTitle = container.firstElementChild.getAttribute('value');
+
+      let getChildTag = container.firstElementChild.tagName;
+
+      sliderImgObj.push({
+        src: getImgSrc,
+        title: getImgTitle,
+        tag: getChildTag,
+      });
+      // sliderImgObj.src.push(getImgSrc);
+      // sliderImgObj.title.push(getImgTitle);
+      // sliderImgObj.childTag.push(getChildTag);
+
+      container.addEventListener('click', () => {
+        slider.style.display = 'flex';
+
+        if (getChildTag === 'IMG') {
+          slidesContainer.innerHTML = `
+          <img
+            src="${getImgSrc}"
+            class="slider-img"
+            value='${i}'
+            alt="une belle image"
+          />
+          <span class="slider-img-title" >${getImgTitle}</span>`;
+        } else {
+          slidesContainer.innerHTML = `
+          <video
+            src="${getImgSrc}"
+            class="slider-img"
+            value='${i}'
+            alt="une belle video"
+          /></video>
+          <span class="slider-img-title">${getImgTitle}</span>`;
+        }
+        handleSlide(sliderImgObj, itemsLength, i);
+      });
+    });
+  };
+  showSlider();
+  const handleSlide = (sliderImgObj, itemsLength, i) => {
+    const chevronLeft = document.querySelector('.fa-chevron-left');
+    const chevronRight = document.querySelector('.fa-chevron-right');
+    chevronLeft.addEventListener('click', () => {
+      i--;
+      if (i < 0) {
+        i = itemsLength - 1;
+      }
+      if (sliderImgObj[i].tag === 'IMG') {
+        slidesContainer.innerHTML = `
+          <img
+            src="${sliderImgObj[i].src}"
+            class="slider-img"
+            value='${i}'
+            alt="une belle image"
+          />
+          <span class="slider-img-title" >${sliderImgObj[i].title}</span>`;
+      } else {
+        slidesContainer.innerHTML = `
+          <video
+            src="${sliderImgObj[i].src}"
+            class="slider-img"
+            value='${i}'
+            alt="une belle video"
+          /></video>
+          <span class="slider-img-title">${sliderImgObj[i].title}</span>`;
+      }
+    });
+
+    chevronRight.addEventListener('click', () => {
+      i++;
+      if (i > itemsLength - 1) {
+        i = 0;
+      }
+      if (sliderImgObj[i].tag === 'IMG') {
+        slidesContainer.innerHTML = `
+          <img
+            src="${sliderImgObj[i].src}"
+            class="slider-img"
+            value='${i}'
+            alt="une belle image"
+          />
+          <span class="slider-img-title" >${sliderImgObj[i].title}</span>`;
+      } else {
+        slidesContainer.innerHTML = `
+          <video
+            src="${sliderImgObj[i].src}"
+            class="slider-img"
+            value='${i}'
+            alt="une belle video"
+          /></video>
+          <span class="slider-img-title">${sliderImgObj[i].title}</span>`;
+      }
+    });
+  };
+
+  const closeSlider = () => {
+    closeSliderBtn.addEventListener('click', () => {
+      slider.style.display = 'none';
+    });
+  };
+  closeSlider();
+};
+
 //UI
 const singleContentContainer = document.querySelector(
   '.single-content-container'
@@ -5,14 +123,47 @@ const singleContentContainer = document.querySelector(
 const likes = document.querySelectorAll('.likes');
 const herosInfos = document.querySelector('.hero-infos');
 const heroImg = document.querySelector('.hero-img');
-let getLikes = [];
-const profilData = JSON.parse(sessionStorage.getItem('profil_array'));
+const getUrlId = document.location.search.slice(4);
+const sum = document.querySelector('.sum');
+const rate = document.querySelector('.rate');
+const getLikes = [];
 
-const { infos, medias } = profilData;
+/*************
+   GET DATAS
+**************/
+const data = async () => {
+  const dataBase = await fetch('../data.json')
+    .then((response) => response.json())
+    .then((json) => json);
 
-const displaySingleInfo = () => {
-  infos.map(({ name, id, city, country, tags, tagline, price, portrait }) => {
-    herosInfos.innerHTML = `
+  getDataById(dataBase);
+  displaySingleInfo(getDataById(dataBase));
+  displayMedias(getDataById(dataBase));
+};
+data();
+
+const getDataById = ({ media, photographers }) => {
+  let dataById = {
+    infos: [],
+    medias: [],
+  };
+
+  dataById.medias = media.filter((item) =>
+    item.photographerId === +getUrlId ? true : false
+  );
+
+  dataById.infos = photographers.filter((photographer) =>
+    photographer.id === +getUrlId ? true : false
+  );
+
+  return dataById;
+};
+
+//////////////SHOW DATAS////////////////////
+const displaySingleInfo = (data) => {
+  data.infos.map(
+    ({ name, id, city, country, tags, tagline, price, portrait }) => {
+      herosInfos.innerHTML = `
       <div class="single-card">
         <div class="name-container">
           <h1>${name}</h1>
@@ -33,14 +184,19 @@ const displaySingleInfo = () => {
         </div>
       </div>
     `;
-  });
-  heroImg.setAttribute('src', `./assets/img/idPhotos/${infos[0].portrait}`);
+    }
+  );
+  heroImg.setAttribute(
+    'src',
+    `./assets/img/idPhotos/${data.infos[0].portrait}`
+  );
+  handleForm(data);
 };
-displaySingleInfo();
 
-const displayMedia = () => {
-  let singleName = infos[0].name;
-  medias.map(({ title, image, likes, id, video }) => {
+const displayMedias = (data) => {
+  singleContentContainer.innerHTML = '';
+  let singleName = data.infos[0].name;
+  data.medias.map(({ title, image, likes, id, video }) => {
     let numLike = +likes;
     let isImg = image ? true : false;
     singleContentContainer.innerHTML += `
@@ -72,130 +228,16 @@ const displayMedia = () => {
     `;
     getLikes.push(numLike);
   });
+  handleSlider();
+  sumLikes(data);
+  addLikes();
 };
-displayMedia();
+// displayMedias(medias);
 
-//////////////////////////
-//SLIDER
-///////////////
-const closeSliderBtn = document.querySelector('.close-slider-btn');
-const slider = document.querySelector('.slider');
-const slidesContainer = document.querySelector('.slides-container');
-
-const showSlider = () => {
-  const imgContainers = document.querySelectorAll('.img-container');
-  let sliderImgObj = [];
-
-  imgContainers.forEach((container, i) => {
-    let getImgSrc = container.firstElementChild.getAttribute('src');
-    let getImgTitle = container.firstElementChild.getAttribute('value');
-
-    let getChildTag = container.firstElementChild.tagName;
-
-    sliderImgObj.push({
-      src: getImgSrc,
-      title: getImgTitle,
-      tag: getChildTag,
-    });
-    // sliderImgObj.src.push(getImgSrc);
-    // sliderImgObj.title.push(getImgTitle);
-    // sliderImgObj.childTag.push(getChildTag);
-
-    container.addEventListener('click', () => {
-      slider.style.display = 'flex';
-
-      if (getChildTag === 'IMG') {
-        slidesContainer.innerHTML = `
-          <img
-            src="${getImgSrc}"
-            class="slider-img"
-            value='${i}'
-            alt="une belle image"
-          />
-          <span class="slider-img-title" >${getImgTitle}</span>`;
-      } else {
-        slidesContainer.innerHTML = `
-          <video
-            src="${getImgSrc}"
-            class="slider-img"
-            value='${i}'
-            alt="une belle video"
-          /></video>
-          <span class="slider-img-title">${getImgTitle}</span>`;
-      }
-      handleSlide(sliderImgObj, i);
-    });
-  });
-};
-
-const handleSlide = (sliderImgObj, i) => {
-  const chevronLeft = document.querySelector('.fa-chevron-left');
-  const chevronRight = document.querySelector('.fa-chevron-right');
-  console.log(sliderImgObj);
-  chevronLeft.addEventListener('click', () => {
-    i--;
-    if (sliderImgObj[i].tag === 'IMG') {
-      slidesContainer.innerHTML = `
-          <img
-            src="${sliderImgObj[i].src}"
-            class="slider-img"
-            value='${i}'
-            alt="une belle image"
-          />
-          <span class="slider-img-title" >${sliderImgObj[i].title}</span>`;
-    } else {
-      slidesContainer.innerHTML = `
-          <video
-            src="${sliderImgObj[i].src}"
-            class="slider-img"
-            value='${i}'
-            alt="une belle video"
-          /></video>
-          <span class="slider-img-title">${sliderImgObj[i].title}</span>`;
-    }
-  });
-
-  chevronRight.addEventListener('click', () => {
-    i++;
-    if (sliderImgObj[i].tag === 'IMG') {
-      slidesContainer.innerHTML = `
-          <img
-            src="${sliderImgObj[i].src}"
-            class="slider-img"
-            value='${i}'
-            alt="une belle image"
-          />
-          <span class="slider-img-title" >${sliderImgObj[i].title}</span>`;
-    } else {
-      slidesContainer.innerHTML = `
-          <video
-            src="${sliderImgObj[i].src}"
-            class="slider-img"
-            value='${i}'
-            alt="une belle video"
-          /></video>
-          <span class="slider-img-title">${sliderImgObj[i].title}</span>`;
-    }
-  });
-};
-
-showSlider();
-
-const closeSlider = () => {
-  closeSliderBtn.addEventListener('click', () => {
-    slider.style.display = 'none';
-  });
-};
-closeSlider();
-
-//////////////////////////
-//HANDLE LIKES
-///////////////
-const sum = document.querySelector('.sum');
-const rate = document.querySelector('.rate');
+////////////////////////////HANDLE LIKES///////////////
 //total likes container
-const reduceLikes = () => {
-  let price = infos[0].price;
+const sumLikes = (data) => {
+  let price = data.infos[0].price;
 
   const totalLikes = getLikes.reduce((total, item) => {
     total += item;
@@ -205,7 +247,6 @@ const reduceLikes = () => {
   sum.innerText = totalLikes;
   rate.innerText = `${price} euros/jours`;
 };
-reduceLikes();
 
 // add likes
 const addLikes = () => {
@@ -225,50 +266,90 @@ const addLikes = () => {
     });
   });
 };
-addLikes();
+
+//////////////////
+//SORTBY
+////////
+
+// const newMediasArray = data();
+// const toto = newMediasArray.slice();
+// const mediaByTitle = newMediasArray.sort((x, y) => {
+//   if (x.title.toLowerCase() < y.title.toLowerCase()) return -1;
+
+//   if (x.title.toLowerCase() > y.title.toLowerCase()) return 1;
+// });
+
+// const mediaByDate = newMediasArray.sort((a, b) => {
+//   let tempA = Date.parse(a.date);
+//   let tempB = Date.parse(b.date);
+//   return tempB - tempA;
+// });
+// const mediaByPopularity = newMediasArray.sort((a, b) => b.likes - a.likes);
+
+// byPopularity.addEventListener('click', () => {
+//   displayMedias(mediaByPopularity);
+// });
+// byDate.addEventListener('click', () => {
+//   displayMedias(medias);
+// });
+// byTitle.addEventListener('click', () => {
+//   displayMedias(mediaByTitle);
+// });
+
+// console.log(mediaByDate);
+
+////////////////dropdown menu
+const chevron = document.querySelector('.chevron-down');
+const dropdownMenu = document.querySelector('.dropdown-menu');
+const byPopularity = document.querySelector('.by-popularity');
+const byDate = document.querySelector('.by-date');
+const byTitle = document.querySelector('.by-title');
+
+chevron.addEventListener('click', () => {
+  chevron.classList.toggle('toggle-chevron');
+  dropdownMenu.classList.toggle('show-dropdown');
+});
 
 //////////////////
 //FORM
 ////////
-const modalForm = document.querySelector('.modal-form');
-const formName = document.querySelector('.form-photographer');
+const handleForm = (data) => {
+  const modalForm = document.querySelector('.modal-form');
+  const formName = document.querySelector('.form-photographer');
+  const btnSubmit = document.querySelector('.btn-submit');
 
-const form = document.querySelector('form');
-const inputs = document.querySelectorAll('.form-input');
-const closeForm = document.querySelector('.close-form-btn');
-const btnSubmit = document.querySelector('.btn-submit');
-const btnContact = document.querySelector('.contact-btn');
-const singleName = infos[0].name;
-
-//toggle form
-closeForm.addEventListener('click', () => {
-  modalForm.style.display = 'none';
-});
-
-btnContact.addEventListener('click', () => {
-  modalForm.style.display = 'flex';
-  formName.innerText = singleName;
-});
-
-//get form data
-
-const getFormData = () => {
-  const data = {
+  const closeForm = document.querySelector('.close-form-btn');
+  const btnContact = document.querySelector('.contact-btn');
+  const singleName = data.infos[0].name;
+  const form = document.querySelector('form');
+  const inputs = document.querySelectorAll('.form-input');
+  const submitedData = {
     prenom: null,
     nom: null,
     email: null,
     message: null,
   };
+  //toggle form
+  closeForm.addEventListener('click', () => {
+    modalForm.style.display = 'none';
+  });
 
-  btnSubmit.addEventListener('click', (e) => {
+  btnContact.addEventListener('click', () => {
+    modalForm.style.display = 'flex';
+    formName.innerText = singleName;
+  });
+  //submit
+  btnSubmit.addEventListener('submit', (e) => {
     e.preventDefault();
     inputs.forEach((input) => {
       let inputId = input.getAttribute('id');
-      data[inputId] = input.value;
-      form.reset();
+      submitedData[inputId] = input.value;
       modalForm.style.display = 'none';
+      console.log(submitedData);
+      form.reset();
     });
-    console.log(data);
   });
 };
-getFormData();
+
+//get form data
+const getFormData = (modalForm) => {};
