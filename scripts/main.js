@@ -4,7 +4,7 @@ const photographersContainer = document.querySelector(
 );
 
 const data = async () => {
-  const dataBase = await fetch('../data.json')
+  const dataBase = await fetch('./data.json')
     .then((response) => response.json())
     .then((json) => json);
 
