@@ -1,0 +1,59 @@
+@use '../utils/variables' as v;
+
+.orderBy-section {
+  margin-top: 20px;
+  margin-bottom: 50px;
+  display: flex;
+  position: absolute;
+  top: 440px;
+  z-index: 2;
+  & h2 {
+    font-weight: bold;
+    font-size: 1.3em;
+    margin-right: 15px;
+  }
+
+  & ul {
+    background: v.$primary;
+    width: 180px;
+    height: 60px;
+    overflow-y: hidden;
+    border-radius: 5px;
+    transition: 0.4s;
+  }
+  & i {
+    background: v.$primary;
+    color: white;
+    position: absolute;
+    right: 4.1%;
+    top: 22px;
+    cursor: pointer;
+    transition: 0.4s;
+  }
+
+  & li {
+    border: none;
+    color: white;
+    padding: 18px;
+    text-align: start;
+    font-size: 1.3em;
+    cursor: pointer;
+  }
+
+  & .subline {
+    margin: 0 auto;
+    width: 160px;
+    height: 1px;
+    border-bottom: 1px solid white;
+  }
+}
+
+.toggle-chevron {
+  transform: rotate(180deg);
+  right: 4.1%;
+  top: 21px !important;
+}
+
+.show-dropdown {
+  height: 180px !important;
+}

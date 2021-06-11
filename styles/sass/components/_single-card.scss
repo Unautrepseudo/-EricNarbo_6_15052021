@@ -15,10 +15,12 @@
     height: 340px;
   }
 
-  & img {
+  & img,
+  video {
     border-radius: 6px;
     width: 100%;
     object-fit: cover;
+    cursor: pointer;
   }
 
   & i {
