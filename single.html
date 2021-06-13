@@ -12,7 +12,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="styles/css/style.css" />
-    <script src="./scripts/single.js" defer></script>
+    <script type="module" src="./scripts/single.js" defer></script>
     <title>FishEye page de {artiste}</title>
   </head>
   <body>
@@ -24,7 +24,7 @@
       </header>
       <section class="hero">
         <div class="hero-infos"></div>
-        <img class="hero-img" src="" alt="" />
+        <img class="hero-img" src="/" alt="" />
       </section>
       <section class="total-likes-container">
         <div class="sum-container">
@@ -36,18 +36,18 @@
         <h2>Trier par</h2>
         <ul class="dropdown-menu">
           <li class="">
-            <span value="Popularité" class="by-popularity">Popularité</span>
-            <i class="fas fa-chevron-circle-up chevron-down"></i>
+            <span class="by-popularity">Popularité</span>
+            <i class="fas fa-chevron-circle-down chevron-down"></i>
           </li>
-          <div class="subline"></div>
-          <li class="by-date" value="Date">Date</li>
-          <div class="subline"></div>
-          <li class="by-title" value="Titre">Titre</li>
+          <li class="subline"></li>
+          <li class="by-date">Date</li>
+          <li class="subline"></li>
+          <li class="by-title">Titre</li>
         </ul>
       </section>
       <section class="single-content-container"></section>
       <section class="modal-form">
-        <form action="">
+        <form action="" method="POST">
           <div class="form-header">
             <span>Contactez-moi</span>
             <span class="form-photographer"></span>
