@@ -3,28 +3,28 @@
 @use '../components/_profilCard.scss';
 @use '../components/buttons.scss';
 @use '../utils/variables' as v;
+@use '../utils/responsive';
 
 .main-container {
-  width: 90%;
-  margin-left: 53%;
-  transform: translateX(-50%);
+  width: 80%;
+  margin: 0 auto;
 }
 
 main {
   margin-top: 100px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 
   h1 {
     font-size: 40px;
     position: absolute;
-    right: 17%;
+    right: 14%;
     top: 63px;
     color: v.$text-secondary;
   }
   .profil-cards-container {
     display: flex;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
   }

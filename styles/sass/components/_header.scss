@@ -2,10 +2,12 @@
 
 .main-container {
   header {
-    width: 66%;
+    // width: 80%;
     display: flex;
-    justify-content: center;
+    margin-left: 140px;
+    justify-content: start;
     align-items: center;
+    flex-wrap: wrap;
 
     & .logo {
       font-size: 60px;
@@ -13,7 +15,10 @@
       color: v.$text-secondary;
     }
     & nav {
-      transform: translateX(50px);
+      margin-left: 100px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
     }
   }
 }

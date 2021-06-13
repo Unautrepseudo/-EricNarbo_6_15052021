@@ -3,8 +3,6 @@ const photographersContainer = document.querySelector(
   '.profil-cards-container'
 );
 
-let lulu;
-
 const getData = async () => {
   let response = await fetch('./data.json');
   let data = await response.json();
@@ -70,10 +68,6 @@ const ShowTagsMenu = async () => {
 };
 
 const getTagElements = async (filteredPhotographer = null) => {
-  // return document.querySelectorAll('.tag');
-  // filteredPhotographer !=null
-  //   ? showPhotographers(filteredPhotographer)
-  //   : await showPhotographers();
   if (filteredPhotographer) {
     return document.querySelectorAll('.tag');
   } else {
@@ -84,7 +78,6 @@ const getTagElements = async (filteredPhotographer = null) => {
 const onTagClick = async () => {
   let tags = await getTagElements();
   let photographers = await getData();
-
   let tagName;
 
   tags.forEach((tag) => {
@@ -97,8 +90,8 @@ const onTagClick = async () => {
 
 const filter = async (tagName, photographers) => {
   let showedPhotographers = await showPhotographers();
-
   let filteredPhotographers = [];
+
   photographers.filter((photographer) => {
     photographer.tags.filter((tag) => {
       if (tag === tagName) {
