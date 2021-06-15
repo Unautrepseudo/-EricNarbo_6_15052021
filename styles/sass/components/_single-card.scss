@@ -1,7 +1,8 @@
 @use '../utils/variables' as v;
 
 .sc-card {
-  width: 370px;
+  width: 33%;
+  max-width: 370px;
   height: 370px;
   margin-bottom: 40px;
   color: v.$text-secondary;

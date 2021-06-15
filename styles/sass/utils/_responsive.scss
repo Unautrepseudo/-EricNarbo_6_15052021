@@ -18,6 +18,7 @@
 
   header {
     width: 100% !important;
+    margin-left: 0 !important;
   }
   .main-container header nav {
     transform: translate(0, 60px);
@@ -25,6 +26,126 @@
 
   .profil-card {
     width: 360px;
+  }
+
+  //single page
+
+  .single-container .logo {
+    font-size: 50px !important;
+  }
+  .hero {
+    padding: 5px 5px 15px 5px !important;
+    align-items: center;
+
+    .sc-tags-container {
+      margin-top: 10px;
+    }
+
+    h1 {
+      font-size: 2.3em !important;
+    }
+
+    img {
+      border-radius: 50%;
+      width: 110px !important;
+      height: 110px !important;
+    }
+    .hero-img-container {
+      transform: translate(-110px, -15px) !important;
+    }
+  }
+
+  .contact-btn {
+    position: fixed;
+    width: 170px !important;
+    margin-left: 0 !important;
+    left: 50%;
+    top: 90%;
+    transform: translate(-50%, -50%);
+    height: 45px !important;
+  }
+
+  .single-container {
+    width: 95% !important;
+
+    header {
+      padding-top: 30px !important;
+    }
+  }
+
+  .orderBy-section {
+    display: none !important;
+  }
+
+  .single-content-container {
+    width: 95vw !important;
+    padding-top: 50px !important;
+  }
+
+  .sc-card {
+    height: 260px !important;
+    width: 354px !important;
+  }
+
+  .img-container {
+    max-height: 220px !important;
+  }
+
+  .total-likes-container {
+    display: none !important;
+  }
+
+  //form
+  form {
+    left: 0% !important;
+    transform: translateX(-9px) !important;
+    width: 100% !important;
+    height: 100% !important ;
+    margin: 0;
+    border-radius: 0 !important;
+
+    .form-header {
+      font-size: 34px !important;
+    }
+
+    label {
+      font-size: 22px !important;
+      margin-top: 10px !important;
+      margin-bottom: 5px !important;
+    }
+    input {
+      height: 80px !important;
+    }
+    .btn-submit {
+      width: 170px !important;
+      height: 30px !important;
+      margin: 0 auto;
+      transform: translateY(20px) !important;
+    }
+  }
+
+  //slider
+
+  .slider {
+    i {
+      font-size: 23px !important;
+    }
+    .slider-img-title {
+      font-size: 20px !important;
+    }
+    .slides-container {
+      margin-top: 180px !important;
+      margin-left: 10px !important;
+      margin-right: 10px !important;
+    }
+    .slider-img-container {
+      width: 300px !important;
+      height: 300px !important;
+      align-self: center;
+    }
+    .close-slider-btn {
+      transform: translate(-15px, -145px) !important;
+    }
   }
 }
 
@@ -54,5 +175,36 @@
 
     transform: scale(1.2);
     transform: translate(-150px, 30px);
+  }
+}
+
+//single
+@media (min-width: 963px) and (max-width: 1315px) {
+  .single-container {
+    width: 85% !important;
+  }
+
+  form {
+    left: 50% !important;
+    transform: translateX(-25%) !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 962px) {
+  .single-container {
+    width: 95% !important;
+  }
+  .single-content-container {
+    justify-content: center !important;
+  }
+
+  form {
+    left: 50% !important;
+    transform: translateX(0) !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1229px) {
+  .sc-card {
+    width: 370px !important;
   }
 }
