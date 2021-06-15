@@ -41,17 +41,23 @@
       margin-top: 10px;
     }
 
-    h1 {
-      font-size: 2.3em !important;
+    .hero-infos {
+      display: flex !important;
+      justify-content: space-between !important;
     }
-
+    h1 {
+      font-size: 1.7em !important;
+    }
+    .tagline {
+      font-size: 0.9em !important;
+    }
     img {
       border-radius: 50%;
       width: 110px !important;
       height: 110px !important;
     }
-    .hero-img-container {
-      transform: translate(-110px, -15px) !important;
+    .sc-location {
+      font-size: 1.5em !important;
     }
   }
 

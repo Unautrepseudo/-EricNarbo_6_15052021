@@ -175,16 +175,23 @@ button:hover {
   .hero .sc-tags-container {
     margin-top: 10px;
   }
+  .hero .hero-infos {
+    display: flex !important;
+    justify-content: space-between !important;
+  }
   .hero h1 {
-    font-size: 2.3em !important;
+    font-size: 1.7em !important;
+  }
+  .hero .tagline {
+    font-size: 0.9em !important;
   }
   .hero img {
     border-radius: 50%;
     width: 110px !important;
     height: 110px !important;
   }
-  .hero .hero-img-container {
-    transform: translate(-110px, -15px) !important;
+  .hero .sc-location {
+    font-size: 1.5em !important;
   }
 
   .contact-btn {
