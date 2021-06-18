@@ -17,17 +17,12 @@ const getLikes = [];
    GET DATAS
 **************/
 const data = async () => {
-  const dataBase = await fetch('../data.json')
-    .then((response) => response.json())
-    .then((json) => json);
-
-  getDataById(dataBase);
-  displaySingleInfo(getDataById(dataBase));
-  displayMedias(getDataById(dataBase));
+  let response = await fetch('./data.json');
+  let dataBase = await response.json();
+  return dataBase;
 };
-data();
-
-const getDataById = ({ media, photographers }) => {
+const getDataById = async () => {
+  let { media, photographers } = await data();
   let dataById = {
     infos: [],
     medias: [],
@@ -43,12 +38,10 @@ const getDataById = ({ media, photographers }) => {
 
   return dataById;
 };
-
 //////////////SHOW DATAS////////////////////
-const displaySingleInfo = (data) => {
-  data.infos.map(
-    ({ name, id, city, country, tags, tagline, price, portrait }) => {
-      herosInfos.innerHTML = `
+
+const singleCardElement = (name, city, country, tags, tagline) => {
+  return `
       <div class="single-card">
         <div class="name-container">
           <h1>${name}</h1>
@@ -69,19 +62,33 @@ const displaySingleInfo = (data) => {
         </div>
       </div>
     `;
-    }
-  );
+};
+const displaySingleInfo = async () => {
+  let data = await getDataById();
+  data.infos.map(({ name, city, country, tags, tagline }) => {
+    herosInfos.innerHTML = singleCardElement(
+      name,
+      city,
+      country,
+      tags,
+      tagline
+    );
+  });
   heroImg.setAttribute(
     'src',
     `./assets/img/idPhotos/${data.infos[0].portrait}`
   );
+  heroImg.setAttribute('alt', `${data.name}`);
   handleForm(data);
 };
 
-const displayMedias = (data) => {
-  singleContentContainer.innerHTML = '';
+const displayMedias = async (sortedMedias = null) => {
+  let data = await getDataById();
+  let medias;
+  sortedMedias === null ? (medias = data.medias) : (medias = sortedMedias);
+
   let singleName = data.infos[0].name;
-  data.medias.map(({ title, image, likes, id, video }) => {
+  medias.map(({ title, image, likes, id, video }) => {
     let numLike = +likes;
     let isImg = image ? true : false;
     singleContentContainer.innerHTML += `
@@ -93,13 +100,13 @@ const displayMedias = (data) => {
             <img
               src="./assets/img/${singleName}/${image}"
               value="${title}"
-              alt="une belle image"
+              alt="${title}"
             />`
             : `
             <video
               src="./assets/img/${singleName}/${video}"
               value="${title}"
-              alt="une belle video"
+              alt="${title}"
             />`
         }
         </div>
@@ -117,10 +124,10 @@ const displayMedias = (data) => {
   sumLikes(data);
   addLikes();
 };
-// displayMedias(medias);
+displaySingleInfo();
+displayMedias();
 
 ////////////////////////////HANDLE LIKES///////////////
-//total likes container
 const sumLikes = (data) => {
   let price = data.infos[0].price;
 
@@ -133,7 +140,6 @@ const sumLikes = (data) => {
   rate.innerText = `${price} euros/jours`;
 };
 
-// add likes
 const addLikes = () => {
   const likesContainer = document.querySelectorAll('.likes-container');
   let updateslikes = document.querySelectorAll('.likes');
@@ -152,45 +158,75 @@ const addLikes = () => {
   });
 };
 
-//////////////////
-//SORTBY
+////////////////
+//DROPDOWn MENU
 ////////
-
-// const newMediasArray = data();
-// const toto = newMediasArray.slice();
-// const mediaByTitle = newMediasArray.sort((x, y) => {
-//   if (x.title.toLowerCase() < y.title.toLowerCase()) return -1;
-
-//   if (x.title.toLowerCase() > y.title.toLowerCase()) return 1;
-// });
-
-// const mediaByDate = newMediasArray.sort((a, b) => {
-//   let tempA = Date.parse(a.date);
-//   let tempB = Date.parse(b.date);
-//   return tempB - tempA;
-// });
-// const mediaByPopularity = newMediasArray.sort((a, b) => b.likes - a.likes);
-
-// byPopularity.addEventListener('click', () => {
-//   displayMedias(mediaByPopularity);
-// });
-// byDate.addEventListener('click', () => {
-//   displayMedias(medias);
-// });
-// byTitle.addEventListener('click', () => {
-//   displayMedias(mediaByTitle);
-// });
-
-// console.log(mediaByDate);
-
-////////////////dropdown menu
 const chevron = document.querySelector('.chevron-down');
 const dropdownMenu = document.querySelector('.dropdown-menu');
 const byPopularity = document.querySelector('.by-popularity');
 const byDate = document.querySelector('.by-date');
 const byTitle = document.querySelector('.by-title');
+const selectors = document.querySelectorAll('[class^="by"] ');
 
 chevron.addEventListener('click', () => {
   chevron.classList.toggle('toggle-chevron');
   dropdownMenu.classList.toggle('show-dropdown');
 });
+
+//Sort by
+const sortBy = async () => {
+  let data = await getDataById();
+
+  let newMediasArray = data.medias;
+
+  let mediaByPopularity = () =>
+    newMediasArray.sort((a, b) => b.likes - a.likes);
+  let mediaByDate = () =>
+    newMediasArray.sort((a, b) => {
+      let tempA = Date.parse(a.date);
+      let tempB = Date.parse(b.date);
+      return +tempB - +tempA;
+    });
+
+  let mediaByTitle = () =>
+    newMediasArray.sort((a, b) => {
+      if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
+
+      if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
+    });
+
+  let sortByMethods = {
+    bypopularity: mediaByPopularity(),
+    bydate: mediaByDate(),
+    bytitle: mediaByTitle(),
+  };
+
+  // selectors.forEach((selector) => {
+  //   selector.addEventListener('click', (e) => {
+  //     e.preventDefault();
+  //     singleContentContainer.innerHTML = '';
+  //     let getValue = selector.getAttribute('value');
+
+  //     if (getValue === 'bypopularity') {
+  //       displayMedias(sortByMethods.bypopularity);
+  //     }
+  //   });
+  // });
+
+  byPopularity.addEventListener('click', (e) => {
+    e.preventDefault();
+    singleContentContainer.innerHTML = '';
+    displayMedias(mediaByPopularity());
+  });
+  byDate.addEventListener('click', (e) => {
+    e.preventDefault();
+    singleContentContainer.innerHTML = '';
+    displayMedias(mediaByDate());
+  });
+  byTitle.addEventListener('click', (e) => {
+    e.preventDefault();
+    singleContentContainer.innerHTML = '';
+    displayMedias(mediaByTitle());
+  });
+};
+sortBy();

@@ -27,7 +27,7 @@ const showPhotographers = async (data = null) => {
         <div class="profil-card" data-card="${id}">
           <a href="./single.html?id=${id}">
               <div class="pc-header">
-                <img src="./assets/img/idPhotos/${portrait}" alt="" />
+                <img src="./assets/img/idPhotos/${portrait}" alt="${name}" />
                 <h2>${name}</h2>
               </div>
               <div class="pc-info-container">
